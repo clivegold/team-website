@@ -89,6 +89,43 @@ def theo():
     
     return response
 
+@app.route('/daniel')
+def daniel():
+
+    ## THe nature of the web... I built on Theo's code. I have no problem with royalties... ;)
+    ## Note that it doesn't wrap well for mobile phone size screens ("yet")
+
+    file = open("daniel.txt")
+    filecontents = file.read()
+    file.close()
+
+    html_header = """<html><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>img { margin: 15px 15px; } </style>
+    <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+    <title>Pied Piper - Homework 1</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    </head><body><div class="container center-block">"""
+
+    html_body = """<br><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">Daniel's Page</h3></div><div class="panel-body">"""
+    filesplit = filecontents.split('#')
+    html_body += """<table class="table table-bordered table-striped"><colgroup><col class="col-xs-2"><col class="col-xs-7"></colgroup>"""
+    html_body += """<tr><th>Name:</th><td>{}</td></tr>""".format(filesplit[0])
+    html_body += """<tr><th>Hobbies:</th><td>"""
+    for item in filesplit[1].split(','):
+        html_body += """<li>{}</li>""".format(item)
+    html_body += """</td><tr>"""
+    html_body += """<tr><th>Ideal Holiday:</th><td>{}</td>""".format(filesplit[2])
+    html_body += """<tr><td></td><td><img src="{}" width="300">""".format(filesplit[3])
+    html_body += """<img src="{}" width="305"></td></tr></table></div></div>""".format(filesplit[4])
+
+    html_footer = """</div></body></html>"""
+
+    response = html_header + html_body + html_footer
+    
+    return response
+
 @app.route('/elliot')
 def elliot():
 
